@@ -245,7 +245,7 @@ $ python -m pip install --upgrade pip
 
 ###### In command prompt
 #
-```sh
+```cs
 ## change the directory to tarpan folder
 $ cd C:\path_to_folder_location\tarpan
 $ scripts\create_db.py -db "TarPan.db" -refgen "hg19" -pipeline "Targeted_panel" -targetbed "TargetRegions.BED" -groupbed "Groups.BED" -blacklist "blacklist.BED"
