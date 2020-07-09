@@ -242,6 +242,7 @@ $ python -m pip install --upgrade pip
 - BED files:
  	- TargetRegions.BED
  	- Groups.BED
+	- Blacklist.BED
  - Variant analysis result files:
     - Mutation File – VEP annotated “somatic.snvs.vcf” and “somatic.indels.vcf” files from Strelka somatic analysis
  	- Structural Variant File – “somaticSV.vcf” file from MANTA analysis
