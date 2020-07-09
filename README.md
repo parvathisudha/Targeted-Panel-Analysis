@@ -30,8 +30,8 @@ Reference genome: hg19 - can be downloaded from Broadinstitute’s ftp site:
  ```sh
 wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
 ````
- NOTE: unzip and save to /path_to_Home_directory /Database/GATK/gatk-boundle/hg19 
- Please remember to remove the non-main chromosomes from the genome before preprocessing as MANTA analysis requires bam files with main chromosomes only. This can be done using “fasplit”.
+ NOTE: unzip and save to /path_to_Home_directory/Database/GATK/gatk-bundle/hg19 
+ Please remember to remove the non-main chromosomes from the genome before preprocessing as MANTA analysis requires bam files with main chromosomes (1-22, X, Y and MT) only. This can be done using “[fasplit](https://bioconda.github.io/recipes/ucsc-fasplit/README.html)”.
  - GATK_BUNDLE
     - Download all the files to the hg19 folder and unzip them.  
 ```sh
@@ -166,6 +166,12 @@ $ bgzip snvs.fpfilter_tab
 $ tabix -s 1 -b 2 -e 2 snvs.fpfilter_tab.gz
 $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER -H > snvs.fpfilter.vcf
 ```
+##### [VEP](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+- Can be performed using online version.
+- Select, 
+	1) RefSeq transcripts as Transcript database to use.
+	2) HGVS identifier
+	3) Restrict results to "One selected consequence per variant". 
 ##### [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
 - MANTA calls structural variants (SVs) and indels from mapped paired-end sequencing reads. It is optimized for analysis of germline variation in small sets of individuals and somatic variation in tumor/normal sample pairs. 
 - Manta accepts input read mappings from BAM or CRAM files and reports all SV and indel inferences in VCF 4.1 format.
