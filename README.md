@@ -152,6 +152,21 @@ $ vcftools --vcf variants_passed.vcf --extract-FORMAT-info AD
 ##### [fpfilter](https://github.com/ckandoth/variant-filter)
 - FALSE POSITIVE FILTER for variants will improve the precision of variant and mutation calling by removing artifacts associated with short-read alignment. For somatic mutations, generate bam-readcounts with the Tumor BAM. 
 > perl variant-filter-master/fpfilter.pl --help
+- We used default parametrs here, 
+OPTIONS
+--var-file          List of variants in VCF, or tab-delimited list of "CHR POS REF VAR"
+--readcount-file    The output of bam-readcount for the genomic loci in var-file
+--output-file       Output file, tab-delimited list of variants with appended columns for filter status
+--min-read-pos      Minimum avg relative distance of variant from start/end of read [$min_read_pos=0.10]
+--min-strandedness  Minimum representation of variant allele on each strand [$min_strandedness=0.01]
+--min-var-count     Minimum number of variant-supporting reads [$min_var_count=3]
+--min-depth         Minimum read depth required across the variant site [$min_depth =8]
+--min-var-frac      Minimum variant allele fraction [$min_var_frac=0.05]
+--max-mmqs-diff     Maximum difference of mismatch quality sum between var/ref reads (paralog filter) [$max_mmqs_diff=50]
+--max-mapqual-diff  Maximum difference of mapping quality between variant and reference reads [$max_mapqual_diff=30]
+--max-readlen-diff  Maximum difference of average supporting read length between var/ref reads (paralog filter) [$max_readlen_diff=25]
+--min-var-dist-3    Minimum avg distance to effective 3' end of read (real end or Q2) for variant-supporting reads [$min_var_dist_3=0.2]
+--max-var-mmqs      Maximum mismatch quality sum of reference-supporting reads [$max_var_mmqs=100]
 
 ##### [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
 - The purpose of this program is to generate metrics at single nucleotide positions.
@@ -172,6 +187,7 @@ $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO
 	1) RefSeq transcripts as Transcript database to use.
 	2) HGVS identifier
 	3) Restrict results to "One selected consequence per variant". 
+- Download and save as VCF format.
 ##### [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
 - MANTA calls structural variants (SVs) and indels from mapped paired-end sequencing reads. It is optimized for analysis of germline variation in small sets of individuals and somatic variation in tumor/normal sample pairs. 
 - Manta accepts input read mappings from BAM or CRAM files and reports all SV and indel inferences in VCF 4.1 format.
@@ -245,9 +261,10 @@ $ python -m pip install --upgrade pip
 	- Blacklist.BED
  - Variant analysis result files:
     - Mutation File – VEP annotated “somatic.snvs.vcf” and “somatic.indels.vcf” files from Strelka somatic analysis
- 	- Structural Variant File – “somaticSV.vcf” file from MANTA analysis
- 	- SNP file  - “snpdiff.txt” generated from Strelka germline analysis using “snpdiff.R”
- 	- Depth File – “depth.txt” file generated from cnvkit results -  [Generated from normal.targetcoverage.cnn and normal.targetcoverage.cnn]
+    - Structural Variant File – “somaticSV.vcf” file from MANTA analysis
+    - SNP file  - “snpdiff.txt” generated from Strelka germline analysis using “snpdiff.R”
+    - Depth File – “depth.txt” file generated from cnvkit results -  [Generated from normal.targetcoverage.cnn and normal.targetcoverage.cnn]
+    - Metrics file - "hsmetrics.txt" files generated using GATK-hsmetrics
 
 
 ###### In command prompt
