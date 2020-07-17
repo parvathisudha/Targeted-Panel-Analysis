@@ -152,8 +152,8 @@ $ vcftools --vcf variants_passed.vcf --extract-FORMAT-info AD
 ##### [fpfilter](https://github.com/ckandoth/variant-filter)
 - FALSE POSITIVE FILTER for variants will improve the precision of variant and mutation calling by removing artifacts associated with short-read alignment. For somatic mutations, generate bam-readcounts with the Tumor BAM. 
 > perl variant-filter-master/fpfilter.pl --help
-- We used default parametrs here, 
-OPTIONS
+- We used default options, 
+```
 --var-file          List of variants in VCF, or tab-delimited list of "CHR POS REF VAR"
 --readcount-file    The output of bam-readcount for the genomic loci in var-file
 --output-file       Output file, tab-delimited list of variants with appended columns for filter status
@@ -167,7 +167,7 @@ OPTIONS
 --max-readlen-diff  Maximum difference of average supporting read length between var/ref reads (paralog filter) [$max_readlen_diff=25]
 --min-var-dist-3    Minimum avg distance to effective 3' end of read (real end or Q2) for variant-supporting reads [$min_var_dist_3=0.2]
 --max-var-mmqs      Maximum mismatch quality sum of reference-supporting reads [$max_var_mmqs=100]
-
+```
 ##### [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
 - The purpose of this program is to generate metrics at single nucleotide positions.
 -  NOTE: bam files needed to be indexed using [samtools](http://www.htslib.org/doc/samtools-index.html).
@@ -229,7 +229,7 @@ $ java -jar picard.jar CollectHsMetrics \
 ```
 #### Script files:
 Preprocessing.sh
-Variant_analysis.sh
+Panel_analysis.sh
 snpdiff.R
 
 ###### NOTE:  We performed the analysis in the high performance cluster using PBS torque resource manager. 
@@ -244,6 +244,7 @@ snpdiff.R
 >	#PBS -t 1-30
 #
 The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 30 samples. Remember to change this according to your sample size.]
+The sample names were saved as text file.
 
 ### [TarPan](https://github.com/tcashby/tarpan)
  - TarPan Viewer is a tool used to visually inspect targeted panel sequencing data.
