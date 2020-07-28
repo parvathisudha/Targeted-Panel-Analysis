@@ -13,7 +13,7 @@ module load tabix
 module load bedtools
 
 #reference, databases and softwares
-REF="/N/u/parkanha/Carbonate/Database/GATK/gatk-boundle/hg19/ucsc.hg19.fasta"
+REF="//Database/GATK/gatk-boundle/hg19/ucsc.hg19.fasta"
 PICARD="/N/u/parkanha/Carbonate/picard_2.21.1/picard.jar"
 GATK="/N/u/parkanha/Carbonate/gatk-4.1.4.0/gatk"
 # https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
