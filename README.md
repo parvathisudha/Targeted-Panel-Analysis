@@ -282,7 +282,7 @@ Note: Repeat the “create_db_entry.py” for all the samples you need for the d
 ##### For [TarPan Viewer](https://github.com/tcashby/tarpan) 
 - Open the RStudio
 - Clone the repository
-- git clone https://github.com/tcashby/tarpan.git
+- git clone https://github.com/parvathisudha/tarpan.git
 - Create a new R Studio project in the cloned directory and open ui.r, server.r, and install.r.
 - Install dependencies (this command should work, but you may need to manually intervene)
 > source("install.R")
