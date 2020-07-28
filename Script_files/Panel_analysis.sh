@@ -15,11 +15,11 @@ module load vcftools
 module load bedtools
 
 #folders
-HOME_DIR="/"$path"/"
+HOME_DIR=cd ~
 INPUT_DIR="/"$path"/bam/"
 REF="/"$path"/ref_genome/GATK/gatk-bundle/hg19/hg19_chr.fa"
 BEDFILES_DIR=${HOME_DIR}"Dataset1_ex/bedfiles_pipeline2/"
-RESULTS_DIR="/"$path"/result_files"
+RESULTS_DIR="/"$path"/output"
 Germline_DIR=${RESULTS_DIR}"/strelka_germline/"
 Mutation_DIR=${RESULTS_DIR}"/strelka_mutation/"
 manta_DIR=${RESULTS_DIR}"/manta/"
@@ -28,12 +28,12 @@ HSMETRICS_DIR=${RESULTS_DIR}"/hsmetrics/"
 CNVKIT_DIR=${RESULTS_DIR}"/cnvkit/"
 
 #reference, databases and softwares
-Strelka="/"$path"/strelka-2.9.2.centos6_x86_64/bin/"
-MANTA="/"$path"/manta/bin/"
-CNVKIT="/"$path"/cnvkit/cnvkit/"
+Strelka=${HOME_DIR}"/Software_used/strelka-2.9.2.centos6_x86_64/bin/"
+MANTA=${HOME_DIR}"/Software_used/manta/bin/"
+CNVKIT=${HOME_DIR}"/Software_used/cnvkit/cnvkit/"
 
 #sample table
-SAMPLES="/"$path"/panel_sample.txt"
+SAMPLES=${HOME_DIR}"/panel_sample.txt"
 sample=$(sed -n ${PBS_ARRAYID}p panel_sample.txt)
 
 Tumor_ID=$(echo "${sample}" | cut -f 2)
