@@ -15,11 +15,12 @@ module load vcftools
 module load bedtools
 
 #folders
+#Please change the $path according to your sample directory/software path.
 HOME_DIR=cd ~
-INPUT_DIR="/"$path"/bam/"
-REF="/"$path"/ref_genome/GATK/gatk-bundle/hg19/hg19_chr.fa"
+INPUT_DIR="/$path/bam/"
+REF="/$path/ref_genome/GATK/gatk-bundle/hg19/hg19_chr.fa"
 BEDFILES_DIR=${HOME_DIR}"Dataset1_ex/bedfiles_pipeline2/"
-RESULTS_DIR="/"$path"/output"
+RESULTS_DIR="/$path/output"
 Germline_DIR=${RESULTS_DIR}"/strelka_germline/"
 Mutation_DIR=${RESULTS_DIR}"/strelka_mutation/"
 manta_DIR=${RESULTS_DIR}"/manta/"
