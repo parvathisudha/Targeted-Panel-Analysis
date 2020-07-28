@@ -228,20 +228,22 @@ $ java -jar picard.jar CollectHsMetrics \
       TARGET_INTERVALS=target.interval_list
 ```
 #### Script files:
-Preprocessing.sh
-Panel_analysis.sh
-snpdiff.R
+- Preprocessing.sh
+- Panel_analysis.sh
+- snpdiff.R
 
 ###### NOTE:  We performed the analysis in the high performance cluster using PBS torque resource manager. 
  - Shell script info:
->	#!/bin/bash
+ ```sh
+	#!/bin/bash
 	#PBS -M user@iu.edu
 	#PBS -l nodes=1:ppn=1,walltime=15:00:00
 	#PBS -l vmem=100gb
 	#PBS -m abe
-	#PBS -N Somatic_code
+	#PBS -N Analysis
 	#PBS -j oe
->	#PBS -t 1-30
+	#PBS -t 1-30
+```
 #
 The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 30 samples. Remember to change this according to your sample size.]
 The sample names were saved as text file.
