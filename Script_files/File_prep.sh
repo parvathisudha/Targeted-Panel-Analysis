@@ -1,6 +1,7 @@
 #!/bin/bash
 #PBS -k o
-#PBS -l nodes=2:ppn=6,walltime=5:00:00
+#PBS -l nodes=1:ppn=1,walltime=5:00:00
+#PBS -l vmem=16gb
 #PBS -M parkanha@iupui.edu
 #PBS -m abe
 #PBS -N hg19ref
@@ -13,13 +14,14 @@ module load tabix
 module load bedtools
 
 #reference, databases and softwares
-REF="//Database/GATK/gatk-boundle/hg19/ucsc.hg19.fasta"
-PICARD="/N/u/parkanha/Carbonate/picard_2.21.1/picard.jar"
-GATK="/N/u/parkanha/Carbonate/gatk-4.1.4.0/gatk"
+##Please change the $path according to your sample directory/software path
+REF="/Database/GATK/gatk-bundle/hg19/hg19_chr.fa"
+PICARD="/$path/picard_2.21.1/picard.jar"
+GATK="/$path/gatk-4.1.4.0/gatk"
 # https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
-GATK3="/N/u/parkanha/Carbonate/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar"
+GATK3="/$path/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar"
 #change following based on genome version, download from ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
-GATK_BUNDLE_DIR="/N/u/parkanha/Carbonate/Database/GATK/gatk-boundle/hg19/"
+GATK_BUNDLE_DIR="/$path/Database/GATK/gatk-bundle/hg19/"
 MILLS=${GATK_BUNDLE_DIR}/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf
 PHASE1INDELS=${GATK_BUNDLE_DIR}/1000G_phase1.indels.hg19.sites.vcf
 DBSNP=${GATK_BUNDLE_DIR}/dbsnp_138.hg19.vcf
@@ -45,6 +47,7 @@ fi
 #####
 #Prepare/Create output folders for the analysis
 #Make result directory
+#Path to result folder location/home directory
 cd ~
 mkdir output
 cd output
@@ -78,9 +81,9 @@ tabix -f -p bed All.bed.gz
 cd ~
 
 #BedToIntervalList
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel1Mutationsv2_final.BED O=bedfiles/Translocation_list.interval_list SD=${REF}/ucsc.hg19.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel1Mutationsv2_final.BED O=bedfiles/Translocation_list.interval_list SD=${REF}/hg19_chr.dict
 
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/Mutation_v2.bed O=bedfiles/Mutation_list.interval_list SD=${REF}/ucsc.hg19.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/Mutation_v2.bed O=bedfiles/Mutation_list.interval_list SD=${REF}/hg19_chr.dict
 
 
 
