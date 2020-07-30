@@ -51,25 +51,20 @@ fi
 cd ~
 mkdir output
 cd output
-mkdir qc
+mkdir {fastq,qc,bam,result_files}
 cd qc
-mkdir fastqc
-mkdir multiqc
-cd ..
-mkdir bam
-cd bam
+mkdir {fastqc,multiqc}
+cd ../bam
 mkdir temp
 cd temp
-mkdir bwa
-mkdir sorted
-mkdir markdup
-mkdir bqsr_indelrealign
+mkdir {bwa,sorted,markdup,bqsr_indelrealign}
+cd ../../result_files
+mkdir {cnvkit,fpfilter,hsmetrics,manta,strelka_germline,strelka_mutation,vep}
 cd ~
-
 ######
 
 ######
-#Preppare bed files for the analysis
+#Prepare bed files for the analysis. Remember to download the bed files to "BED_files" directory
 cd BED_files
 sort -k1,1V -k2,2n MyelomaPanel1Mutationsv2_final.BED > Mutation.bed
 bgzip -c Mutation.bed > Mutation.bed.gz
