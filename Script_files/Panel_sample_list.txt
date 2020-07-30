@@ -1,0 +1,3 @@
+#INCLUDE	Tumor	Germline	BATCH
+yes	Sample_1_Tumor	Sample_1_normal	batch_x
+yes	Sample_2_Tumor	Sample_2_Normal	batch_x
