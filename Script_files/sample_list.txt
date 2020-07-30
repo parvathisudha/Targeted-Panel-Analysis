@@ -1,0 +1,5 @@
+#INCLUDE  ID	TYPE	BATCH	PLATFORM	CAPTURE	SEQUENCER
+yes	Sample_1_normal	germline	batch_x	Illumina	myeloma_panel	SomeSeq
+yes	Sample_1_Tumor	tumor	batch_x	Illumina	myeloma_panel	SomeSeq
+yes	Sample_2_Normal	germline	batch_x	Illumina	myeloma_panel	SomeSeq
+yes	Sample_2_Tumor	tumor	batch_x	Illumina	myeloma_panel	SomeSeq
