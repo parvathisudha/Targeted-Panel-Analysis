@@ -15,7 +15,7 @@ module load bedtools
 
 #reference, databases and softwares
 ##Please change the $path according to your sample directory/software path
-REF="/Database/GATK/gatk-bundle/hg19/hg19_chr.fa"
+REF="/$path/Database/GATK/gatk-bundle/hg19/hg19_chr.fa"
 PICARD="/$path/picard_2.21.1/picard.jar"
 GATK="/$path/gatk-4.1.4.0/gatk"
 # https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
@@ -76,14 +76,16 @@ bgzip -c Mutation.bed > Mutation.bed.gz
 tabix -f -p bed Mutation.bed.gz
 
 sort -k1,1V -k2,2n MyelomaPanelALL_final.BED > All.bed
-bgzip -c All.bed.gz.bed > All.bed.gz
+bgzip -c All.bed > All.bed.gz
 tabix -f -p bed All.bed.gz
+
+#path to picard
 cd ~
+#BedToIntervalList for HSMetrics
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel2Translocationsv2.BED O=BED_files/Translocation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
-#BedToIntervalList
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel1Mutationsv2_final.BED O=bedfiles/Translocation_list.interval_list SD=${REF}/hg19_chr.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel1Mutationsv2_final.BED O=BED_files/Mutation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/Mutation_v2.bed O=bedfiles/Mutation_list.interval_list SD=${REF}/hg19_chr.dict
 
 
 
