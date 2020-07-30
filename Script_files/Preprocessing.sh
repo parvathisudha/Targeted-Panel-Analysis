@@ -39,6 +39,7 @@ MILLS=${GATK_BUNDLE_DIR}/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf
 PHASE1INDELS=${GATK_BUNDLE_DIR}/1000G_phase1.indels.hg19.sites.vcf
 DBSNP=${GATK_BUNDLE_DIR}/dbsnp_138.hg19.vcf
 
+#Example sample_list is in Script_files folder
 sample=$(sed -n ${PBS_ARRAYID}p sample_list.txt)
 echo $sample
 SAMPLE_ID=$(echo "${sample}" | cut -f 2)
@@ -74,7 +75,7 @@ SEQUENCER=$(echo "${sample}" | cut -f 7)
 	 #	        cat ${rawfile} >> ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz"
 	 #	    done
 	 #	    echo ${SAMPLE_ID}" - "${R}" - fastqc"
-	 #	    ${FASTQC} ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" -o ${FASTQC_DIR}
+	 #	    fastqc ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" -o ${FASTQC_DIR}
 	 #	fi
 	# done
 		    
