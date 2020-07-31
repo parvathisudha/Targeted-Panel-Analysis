@@ -15,8 +15,7 @@ module load fastqc/0.11.5
 #Please change the $path according to your sample directory/software path.
 RAW_FASTQ_DIR="/$path/fastq/"
 RESULTS_DIR="/$path/output"
-#If original fastqs are not merged then please uncomment the next line and change the BWA-mem command accordingly.
-#FASTQ_DIR=${RESULTS_DIR}"/fastq/"
+FASTQ_DIR=${RESULTS_DIR}"/fastq/"
 FASTQC_DIR=${RESULTS_DIR}"/qc/fastqc/"
 MULTIQC_DIR=${RESULTS_DIR}"/qc/multiqc/"
 BAM_DIR=${RESULTS_DIR}"/bam/"
@@ -29,7 +28,7 @@ BAM_GATK_DIR=${RESULTS_DIR}"/bam/temp/bqsr_indelrealign/"
 MASTER_SAMPLE="/$path/samples_list.txt"
 #reference, databases and softwares
 REF="/Database/GATK/gatk-bundle/hg19/hg19_chr.fa"
-PICARD="/$path/picard-2.10.0_picard.jar"
+PICARD="/$path/picard_2.21.1/picard.jar"
 GATK="/$path/gatk-4.1.4.0/gatk"
 # https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
 GATK3="/$path/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar"
@@ -49,11 +48,8 @@ CAPTURE=$(echo "${sample}" | cut -f 6)
 SEQUENCER=$(echo "${sample}" | cut -f 7)
 	
 	#If original fastqs are not merged then
-	#FASTQ_R1=${FASTQ_DIR}${SAMPLE_ID}"_R1.fastq.gz"
-	#FASTQ_R2=${FASTQ_DIR}${SAMPLE_ID}"_R2.fastq.gz"
-	
-	FASTQ_R1=${RAW_FASTQ_DIR}${SAMPLE_ID}"_R1.fastq.gz"
-	FASTQ_R2=${RAW_FASTQ_DIR}${SAMPLE_ID}"_R2.fastq.gz"
+	FASTQ_R1=${FASTQ_DIR}${SAMPLE_ID}"_R1.fastq.gz"
+	FASTQ_R2=${FASTQ_DIR}${SAMPLE_ID}"_R2.fastq.gz"
 	BAM_BWA=${BAM_BWA_DIR}${SAMPLE_ID}"_bwa.bam"
 	BAM_SORTED=${BAM_SORTED_DIR}${SAMPLE_ID}"_sorted.bam"
 	BAM_DUPMARK=${BAM_DUPMARK_DIR}${SAMPLE_ID}"_dupmarked.bam"
@@ -65,26 +61,19 @@ SEQUENCER=$(echo "${sample}" | cut -f 7)
 	BAM_RMDUP=${BAM_DIR}${SAMPLE_ID}"_final_remdup.bam"
 	
 	#If original fastqs are not merged then - please uncomment the following.
-	#for R in "R1" "R2"; do
-	# prepare, compress and run fastqc
-	 #   if ! ls ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" 1> /dev/null 2>&1; then
-	 #	    echo ${SAMPLE_ID}" - "${R}" - merging fastq files:"
-	 #	    touch ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz"
-	 #	    for rawfile in ${RAW_FASTQ_DIR}${SAMPLE_ID}*"_"${R}"_"*; do
-	 #	        echo ${rawfile}
-	 #	        cat ${rawfile} >> ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz"
-	 #	    done
-	 #	    echo ${SAMPLE_ID}" - "${R}" - fastqc"
-	 #	    fastqc ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" -o ${FASTQC_DIR}
-	 #	fi
-	# done
-		    
-	
-	#run fastqc
 	for R in "R1" "R2"; do
-	echo ${SAMPLE_ID}" - "${R}" - fastqc"
-		    fastqc ${RAW_FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" -o ${FASTQC_DIR}
-		done
+	# prepare, compress and run fastqc
+	    if ! ls ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" 1> /dev/null 2>&1; then
+	 	    echo ${SAMPLE_ID}" - "${R}" - merging fastq files:"
+	 	    touch ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz"
+	 	    for rawfile in ${RAW_FASTQ_DIR}${SAMPLE_ID}*"_"${R}"_"*; do
+	 	        echo ${rawfile}
+	 	        cat ${rawfile} >> ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz"
+	 	    done
+	 	    echo ${SAMPLE_ID}" - "${R}" - fastqc"
+	 	    fastqc ${FASTQ_DIR}${SAMPLE_ID}"_"${R}".fastq.gz" -o ${FASTQC_DIR}
+	 	fi
+	 done
 	
 	#align to human genome reference (BWA MEM)
 	#mkdir -p ${BAM_BWA_DIR}
