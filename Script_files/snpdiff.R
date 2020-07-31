@@ -3,7 +3,7 @@ library(tidyr)
 library(devtools)
 
 #setwd("")
-AD <- read.table("HD829_CTL_S49_out.AD.FORMAT", sep="\t", header = T)
+AD <- read.table("out.AD.FORMAT", sep="\t", header = T)
 #ADR <- read.table("out.ADR.FORMAT", sep="\t", header = T)
 #ADF <- read.table("out.ADF.FORMAT", sep="\t", header = T)
 
@@ -34,5 +34,5 @@ AD_cal$tcount <- AD_cal$tAD1 + AD_cal$tAD2
 AD_cal$tvaf <- AD_cal$tAD2 / AD_cal$tcount
 
 snpdiff <- AD_cal[names(AD_cal) %in% c("chrom", "pos", "ncount", "nvaf", "tcount", "tvaf")]
-write.table(snpdiff, file="HD829_CTL_S49_snpdiff.txt", sep= "\t", quote=F,col.names = T, row.names = F)
+write.table(snpdiff, file="snpdiff.txt", sep= "\t", quote=F,col.names = T, row.names = F)
 
