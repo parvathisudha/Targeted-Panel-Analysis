@@ -4,8 +4,6 @@ library(devtools)
 
 #setwd("")
 AD <- read.table("out.AD.FORMAT", sep="\t", header = T)
-#ADR <- read.table("out.ADR.FORMAT", sep="\t", header = T)
-#ADF <- read.table("out.ADF.FORMAT", sep="\t", header = T)
 
 cols <- c("chrom", "pos", "normal", "tumor")
 colnames(AD) <- cols
