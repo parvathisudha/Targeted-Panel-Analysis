@@ -66,7 +66,7 @@ cat somatic.indels.vcf | vcf-annotate -H somatic.indels.vcf > somatic.indels_pas
 #If calculating the VAF for the resulting indels, please use the following code,
 #vcftools --vcf somatic.indels_passed.vcf --extract-FORMAT-info TIR
 #vcftools --vcf somatic.indels_passed.vcf --extract-FORMAT-info TAR
-#cp ${HOME_DIR}/indel_vaf.R ${Mutation_DIR}${Tumor_ID}/results/variants/
+#cp ${HOME_DIR}/Script_files/indel_vaf.R ${Mutation_DIR}${Tumor_ID}/results/variants/
 #Rscript -e 'source("indel_vaf.R")'
 #cp indel_vaf.txt ${Tumor_ID}"_indel_vaf.txt"
 #cp somatic.indels_passed.vcf ${Tumor_ID}"_somatic.indels_passed.vcf"
@@ -106,7 +106,7 @@ cat variants.vcf | vcf-annotate -H variants.vcf > variants_passed.vcf
 cp variants_passed.vcf ${Tumor_ID}"_snp_variants_passed.vcf"
 # Extract AD from vcf files
 vcftools --vcf variants_passed.vcf --extract-FORMAT-info AD
-cp ${HOME_DIR}/snpdiff.R ${Germline_DIR}${Tumor_ID}/results/variants/
+cp ${HOME_DIR}/Script_files/snpdiff.R ${Germline_DIR}${Tumor_ID}/results/variants/
 Rscript -e 'source("snpdiff.R")'
 cp snpdiff.txt ${Tumor_ID}"_snpdiff.txt"
 cp ${Germline_DIR}${Tumor_ID}/results/variants/${Tumor_ID}"_snpdiff.txt" ${DB_FILES}/
@@ -144,7 +144,7 @@ ${CNVKIT}/cnvkit.py batch ${Tumor_bam} --normal ${Normal_bam} --targets ${BEDFIL
 cd ${CNVKIT_DIR}${Tumor_ID}/
 ${CNVKIT}/cnvkit.py coverage ${Tumor_bam} ${BEDFILES_DIR}/All.bed -o Tumor_Sample.targetcoverage.cnn
 ${CNVKIT}/cnvkit.py coverage ${Normal_bam} ${BEDFILES_DIR}/All.bed -o Normal_Sample.targetcoverage.cnn
-cp ${HOME_DIR}/CNV_depth.R ${CNVKIT_DIR}${Tumor_ID}/
+cp ${HOME_DIR}/Script_files/CNV_depth.R ${CNVKIT_DIR}${Tumor_ID}/
 Rscript -e 'source("CNV_depth.R")'
 cp depth.txt ${Tumor_ID}"_depth.txt"
 cp ${CNVKIT_DIR}${Tumor_ID}/${Tumor_ID}"_depth.txt" ${DB_FILES}/
