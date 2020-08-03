@@ -51,7 +51,7 @@ fi
 cd ~
 mkdir output
 cd output
-mkdir {fastq,qc,bam,result_files}
+mkdir {fastq,qc,bam,result_files,DB_files,sam_index_bam}
 cd qc
 mkdir {fastqc,multiqc}
 cd ../bam
