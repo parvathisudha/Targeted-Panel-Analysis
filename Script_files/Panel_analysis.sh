@@ -73,7 +73,8 @@ cat somatic.indels.vcf | vcf-annotate -H somatic.indels.vcf > somatic.indels_pas
 cp ${Mutation_DIR}${Tumor_ID}/results/variants/${Tumor_ID}"_somatic.indels_passed.vcf" ${DB_FILES}/
 cd ${HOME_DIR}
 
-#path_to_fpfilter index bam files with samtool for fpfilter 
+#path_to_fpfilter index bam files with samtool for fpfilter
+cp ${Tumor_bam} ${SAM_index}
 samtools index ${SAM_index}${Tumor_ID}"_final.bam"
 mkdir ${FPFILTER_DIR}${Tumor_ID}
 #path to bam-readcount and fpfilter.pl
