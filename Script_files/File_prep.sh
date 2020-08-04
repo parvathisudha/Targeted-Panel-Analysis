@@ -29,7 +29,7 @@ DBSNP=${GATK_BUNDLE_DIR}/dbsnp_138.hg19.vcf
 #index reference
 #1) for bwa mem
 if ! ls ${REF}".bwt" 1> /dev/null 2>&1; then
-	${BWA} index -a bwtsw ${REF}
+	bwa index -a bwtsw ${REF}
 fi
 #2) for GATK
 REF_BASE="${REF%.*}"
