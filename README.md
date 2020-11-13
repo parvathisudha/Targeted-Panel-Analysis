@@ -2,7 +2,7 @@
 Targeted sequencing introduces an enrichment step where specific genes or gene regions are selectively amplified using gene panels in a simple PCR reaction. Targeted gene sequencing panels are useful tools for analyzing specific mutations in a given sample. Focused panels contain a select set of genes or gene regions that have known or suspected associations with the disease or phenotype under study. Paired end fastq files from matched tumor and germline samples are need for this analysis.
 The entire pipeline is divided into 3 steps: Preprocessing, Variant Analysis and Targeted sequencing panel Viewer. This workflow is effective for large-scale batch processing. Preprocessing and variant analysis are performed in HPC cluster. 
 
-<img src="pipeline.pdf" >
+![](pipeline.pdf)
 
 # The software used in this pipeline are:
 #### Preprocessing: 
