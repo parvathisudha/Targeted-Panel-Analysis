@@ -33,11 +33,13 @@ CNVKIT_DIR=${RESULTS_DIR}"/cnvkit/"
 SAM_index="/$path/output/samtools_index_bam/"
 DB_FILES="/N/project/Walker_lab/Celgene_TP_data/Dataset1/Parvathi/Dataset1_set2/output/DB_files"
 
-#reference, databases and softwares
+#reference, databases and softwares 
+#Change path accordingly
 REF="/$path/ref_genome/GATK/gatk-bundle/hg19/hg19_chr.fa"
 Strelka=${HOME_DIR}"/Software_used/strelka-2.9.2.centos6_x86_64/bin"
 MANTA=${HOME_DIR}"/Software_used/manta/bin"
 CNVKIT=${HOME_DIR}"/Software_used/cnvkit/cnvkit"
+VEP=${HOME_DIR}"/Software_used/ensembl-vep"
 
 #sample table
 SAMPLES=${HOME_DIR}"/Panel_sample_list.txt"
@@ -71,6 +73,9 @@ cat somatic.indels.vcf | vcf-annotate -H somatic.indels.vcf > somatic.indels_pas
 #cp indel_vaf.txt ${Tumor_ID}"_indel_vaf.txt"
 #cp somatic.indels_passed.vcf ${Tumor_ID}"_somatic.indels_passed.vcf"
 cp ${Mutation_DIR}${Tumor_ID}/results/variants/${Tumor_ID}"_somatic.indels_passed.vcf" ${DB_FILES}/
+cd $VEP
+./vep -i ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed_vep.vcf" --pick --refseq --vcf --pick --refseq --vcf
+cd ${HOME_DIR}
 cd ${HOME_DIR}
 
 #path_to_fpfilter index bam files with samtool for fpfilter
@@ -93,6 +98,8 @@ tabix -s 1 -b 2 -e 2 snvs.fpfilter_tab.gz
 cat ${Mutation_DIR}${Tumor_ID}/results/variants/somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER > ${Tumor_ID}"_snvs.fpfilter_all.vcf"
 cat ${Mutation_DIR}${Tumor_ID}/results/variants/somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER -H > ${Tumor_ID}"_snvs.fpfilter_passed.vcf"
 cp ${FPFILTER_DIR}${Tumor_ID}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" ${DB_FILES}/
+cd $VEP
+./vep -i ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" --pick --refseq --vcf --pick --refseq --vcf
 
 #Strelka_germline_variants_configuration
 mkdir ${Germline_DIR}${Tumor_ID}
@@ -132,6 +139,8 @@ java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Tumor_bam} O=${HSMETRICS
 java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Tumor_bam} O=${HSMETRICS_DIR}"Translocations_"${Tumor_ID}"_hs_metrics.txt" R=${REF} BAIT_INTERVALS=${BEDFILES_DIR}/Translocation_list.interval_list TARGET_INTERVALS=${BEDFILES_DIR}/Translocation_list.interval_list PER_TARGET_COVERAGE=${HSMETRICS_DIR}"Trans_"${Tumor_ID}".txt"
 java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Normal_bam} O=${HSMETRICS_DIR}"Mutation_"${Normal_ID}"_hs_metrics.txt" R=${REF} BAIT_INTERVALS=${BEDFILES_DIR}/Mutation_list.interval_list TARGET_INTERVALS=${BEDFILES_DIR}/Mutation_list.interval_list PER_TARGET_COVERAGE=${HSMETRICS_DIR}"Mut_"${Normal_ID}".txt"
 java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Normal_bam} O=${HSMETRICS_DIR}"Translocations_"${Normal_ID}"_hs_metrics.txt" R=${REF} BAIT_INTERVALS=${BEDFILES_DIR}/Translocation_list.interval_list TARGET_INTERVALS=${BEDFILES_DIR}/Translocation_list.interval_list PER_TARGET_COVERAGE=${HSMETRICS_DIR}"Trans_"${Normal_ID}".txt"
+java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Tumor_bam} O=${HSMETRICS_DIR}"All_"${Tumor_ID}"_hs_metrics.txt" R=${REF} BAIT_INTERVALS=${BEDFILES_DIR}/All_list.interval_list TARGET_INTERVALS=${BEDFILES_DIR}/All_list.interval_list PER_TARGET_COVERAGE=${HSMETRICS_DIR}"All_"${Tumor_ID}".txt"
+java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${Normal_bam} O=${HSMETRICS_DIR}"All_"${Normal_ID}"_hs_metrics.txt" R=${REF} BAIT_INTERVALS=${BEDFILES_DIR}/All_list.interval_list TARGET_INTERVALS=${BEDFILES_DIR}/All_list.interval_list PER_TARGET_COVERAGE=${HSMETRICS_DIR}"All_"${Normal_ID}".txt"
 
 #CVNkit
 mkdir ${CNVKIT_DIR}${Tumor_ID}
