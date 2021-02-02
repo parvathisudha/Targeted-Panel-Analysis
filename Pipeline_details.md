@@ -178,6 +178,19 @@ $ tabix -s 1 -b 2 -e 2 snvs.fpfilter_tab.gz
 $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER -H > snvs.fpfilter.vcf
 ```
 ##### [VEP](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+- Offline 
+	- Download 
+	git clone https://github.com/Ensembl/ensembl-vep.git
+	- Install 
+	cd ensembl-vep
+	perl INSTALL.pl
+	(Intsall homo_sapiens_refseq_vep_102_GRCh37.tar.gz cache files, FASTA files for homo_sapiens and all the plugins)
+	- Test
+	./vep -i examples/homo_sapiens_GRCh38.vcf --cache
+```sh
+## - example
+./vep -i snvs.fpfilter_passed.vcf --everything --fasta /$path/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf --pick --refseq --vcf
+```	
 - Can be performed using online version.
 - Select, 
 	1) RefSeq transcripts as Transcript database to use.
