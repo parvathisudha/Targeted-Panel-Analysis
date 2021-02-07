@@ -135,7 +135,7 @@ $ gunzip *.gz
 $ cat somatic.indels.vcf | vcf-annotate -H > somatic.indels_passed.vcf
 $ cat somatic.snvs.vcf | vcf-annotate -H > somatic.snvs_passed.vcf
 ## Strelka_Germline variants – Configuration:
-$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaGermlineWorkflow.py --bam /$path_to_bam_folder/Sample1_normal_final.bam --bam /$path_to_bam_folder/Sample1_tumor_final.bam --referenceFasta /$path_to_hg19_folder/hg19_chr.fa --runDir /$path_to_strelka_germline_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/ bed Mutation_Translocations.bed.gz
+$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaGermlineWorkflow.py --bam /$path_to_bam_folder/Sample1_normal_final.bam --bam /$path_to_bam_folder/Sample1_tumor_final.bam --referenceFasta /$path_to_hg19_folder/hg19_chr.fa --runDir /$path_to_strelka_germline_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/Mutation_Translocations.bed.gz
 ## Strelka_Germline variants – Execution:
 $ /$path_to_strelka_germline_output_folder/Sample1/runWorkflow.py --quiet -m local -j 8
 ## filter passed variants
