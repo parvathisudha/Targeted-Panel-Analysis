@@ -70,7 +70,7 @@ sort -k1,1V -k2,2n MMmutv21.BED > Mutation.bed
 bgzip -c Mutation.bed > Mutation.bed.gz
 tabix -f -p bed Mutation.bed.gz
 
-sort -k1,1V -k2,2n MyelomaPanelMutv21_Trans.BED > All.bed
+sort -k1,1V -k2,2n MMmutv21_Trans.BED > All.bed
 bgzip -c All.bed > All.bed.gz
 tabix -f -p bed All.bed.gz
 
