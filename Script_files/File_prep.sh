@@ -81,6 +81,7 @@ java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel2Tr
 
 java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MMmutv21.BED O=BED_files/Mutation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MMmutv21_Trans.BED O=BED_files/All_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
 
 
