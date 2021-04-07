@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -M parkanha@iu.edu
-#PBS -l nodes=1:ppn=1,walltime=5:00:00
+#PBS -l nodes=1:ppn=1,walltime=8:00:00
 #PBS -l vmem=30gb
 #PBS -m abe
 #PBS -N panel
