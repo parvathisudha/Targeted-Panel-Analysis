@@ -20,7 +20,7 @@ The entire pipeline is divided into 3 steps: Preprocessing, Variant Analysis and
 - [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
 - [VEP-v96](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - [cnvkit](https://cnvkit.readthedocs.io/en/stable/quickstart.html)
- #### For [TarPan Viewer](https://github.com/tcashby/tarpan)
+ #### For [TarPan Viewer](https://github.com/parvathisudha/tarpan)
 - [SQLite](https://www.sqlite.org/index.html)
 - [DB Viewer](https://sqlitebrowser.org/)
 - [R](https://www.r-project.org/)
