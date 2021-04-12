@@ -14,7 +14,7 @@
 - [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
 - [VEP-v96](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - [cnvkit](https://cnvkit.readthedocs.io/en/stable/quickstart.html)
- #### For [TarPan Viewer](https://github.com/tcashby/tarpan)
+ #### For [TarPan Viewer](https://github.com/parvathisudha/tarpan)
 - [SQLite](https://www.sqlite.org/index.html)
 - [DB Viewer](https://sqlitebrowser.org/)
 - [R](https://www.r-project.org/)
@@ -257,7 +257,7 @@ $ java -jar picard.jar CollectHsMetrics \
 The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 30 samples. Remember to change this according to your sample size.]
 The sample names were saved as text file.
 
-### [TarPan](https://github.com/parvathisudha/tarpan.git)
+### [TarPan](https://github.com/parvathisudha/tarpan)
  - TarPan Viewer is a tool used to visually inspect targeted panel sequencing data.
 ```sh
  Open command prompt
@@ -288,7 +288,7 @@ $ scripts\create_db.py -db "TarPan.db" -refgen "hg19" -pipeline "Targeted_panel"
 $ scripts\create_db_entry.py -db "TarPan.db" -sampid "Sample1" -normid " Sample1Norm" -mutfile "Samples\ Sample1_snvs.fpfilter_passed_vep.vcf" -muttool "Strelka" -svfile " Samples\ Sample1_somaticSV.vcf" -svtool "Manta" -snp " Samples\ Sample1_snpdiff.txt" -depth " Samples\ Sample1_depth.txt"
 ```
 Note: Repeat the “create_db_entry.py” for all the samples you need for the database. 
-##### For [TarPan Viewer](https://github.com/parvathisudha/tarpan.git) 
+##### For [TarPan Viewer](https://github.com/parvathisudha/tarpan) 
 - Open the RStudio
 - Clone the repository
 - git clone https://github.com/parvathisudha/tarpan.git
