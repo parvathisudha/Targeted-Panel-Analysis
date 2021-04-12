@@ -118,10 +118,10 @@ NOTE: BED files need to be sorted and indexed using tabix.
 ```sh
 $ module load tabix
 $ module load bedtools
-$ sort -k1,1V -k2,2n MyelomaPanel1Mutationsv2_final.BED > Mutation.bed
+$ sort -k1,1V -k2,2n MMmutv21.BED > Mutation.bed
 $ bgzip -c Mutation.bed > Mutation.bed.gz
 $ tabix -f -p bed Mutation.bed.gz
-$ sort -k1,1V -k2,2n Mutation_Translocations_final.BED > Mutation_Translocations.bed
+$ sort -k1,1V -k2,2n MMmutv21_Trans.BED > Mutation_Translocations.bed
 $ bgzip -c Mutation_Translocations.bed > Mutation_Translocations.bed.gz
 $ tabix -f -p bed Mutation_Translocations.bed.gz
 ## Strelka_Somatic variants – Configuration:
@@ -186,7 +186,7 @@ $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO
 	perl INSTALL.pl
 	(Intsall homo_sapiens_refseq_vep_102_GRCh37.tar.gz cache files, FASTA files for homo_sapiens and all the plugins)
 	- Test
-	./vep -i examples/homo_sapiens_GRCh38.vcf --cache
+	./vep -i examples/homo_sapiens_GRCh37.vcf --cache
 ```sh
 ## - example
 ./vep -i snvs.fpfilter_passed.vcf --everything --fasta /$path/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf --pick --refseq --vcf
@@ -257,7 +257,7 @@ $ java -jar picard.jar CollectHsMetrics \
 The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 30 samples. Remember to change this according to your sample size.]
 The sample names were saved as text file.
 
-### [TarPan](https://github.com/tcashby/tarpan)
+### [TarPan](https://github.com/parvathisudha/tarpan.git)
  - TarPan Viewer is a tool used to visually inspect targeted panel sequencing data.
 ```sh
  Open command prompt
@@ -288,7 +288,7 @@ $ scripts\create_db.py -db "TarPan.db" -refgen "hg19" -pipeline "Targeted_panel"
 $ scripts\create_db_entry.py -db "TarPan.db" -sampid "Sample1" -normid " Sample1Norm" -mutfile "Samples\ Sample1_snvs.fpfilter_passed_vep.vcf" -muttool "Strelka" -svfile " Samples\ Sample1_somaticSV.vcf" -svtool "Manta" -snp " Samples\ Sample1_snpdiff.txt" -depth " Samples\ Sample1_depth.txt"
 ```
 Note: Repeat the “create_db_entry.py” for all the samples you need for the database. 
-##### For [TarPan Viewer](https://github.com/tcashby/tarpan) 
+##### For [TarPan Viewer](https://github.com/parvathisudha/tarpan.git) 
 - Open the RStudio
 - Clone the repository
 - git clone https://github.com/parvathisudha/tarpan.git
