@@ -189,7 +189,7 @@ $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO
 	./vep -i examples/homo_sapiens_GRCh37.vcf --cache
 ```sh
 ## - example
-./vep -i snvs.fpfilter_passed.vcf --everything --fasta /$path/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf --pick --refseq --vcf
+./vep -i snvs.fpfilter_passed.vcf --everything --fasta /$path/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf
 ```	
 - Can be performed using online version.
 - Select, 
