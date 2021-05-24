@@ -285,7 +285,7 @@ $ python -m pip install --upgrade pip
 ## change the directory to tarpan folder
 $ cd C:\path_to_folder_location\tarpan
 $ scripts\create_db.py -db "TarPan.db" -refgen "hg19" -pipeline "Targeted_panel" -targetbed "TargetRegions.BED" -groupbed "Groups.BED" -blacklist "blacklist.BED"
-$ scripts\create_db_entry.py -db "TarPan.db" -sampid "Sample1" -normid " Sample1Norm" -mutfile "Samples\ Sample1_snvs.fpfilter_passed_vep.vcf" -muttool "Strelka" -svfile " Samples\ Sample1_somaticSV.vcf" -svtool "Manta" -snp " Samples\ Sample1_snpdiff.txt" -depth " Samples\ Sample1_depth.txt"
+$ scripts\create_db_entry.py -db "TarPan.db" -sampid "Sample1" -normid " Sample1Norm" -mutfile "Samples\Sample1_snvs.fpfilter_passed_vep.vcf" -muttool "Strelka" -svfile " Samples\Sample1_somaticSV.vcf" -svtool "Manta" -snp " Samples\Sample1_snpdiff.txt" -depth " Samples\Sample1_depth.txt"
 ```
 Note: Repeat the “create_db_entry.py” for all the samples you need for the database. 
 ##### For [TarPan Viewer](https://github.com/parvathisudha/tarpan) 
