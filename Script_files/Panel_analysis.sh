@@ -74,7 +74,7 @@ cat somatic.indels.vcf | vcf-annotate -H somatic.indels.vcf > somatic.indels_pas
 #cp somatic.indels_passed.vcf ${Tumor_ID}"_somatic.indels_passed.vcf"
 cp ${Mutation_DIR}${Tumor_ID}/results/variants/${Tumor_ID}"_somatic.indels_passed.vcf" ${DB_FILES}/
 cd $VEP
-./vep -i ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed_vep.vcf" --pick --refseq --vcf --pick --refseq --vcf
+./vep -i ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_somatic.indels_passed_vep.vcf" --pick --refseq --vcf
 cd ${HOME_DIR}
 cd ${HOME_DIR}
 
@@ -99,7 +99,7 @@ cat ${Mutation_DIR}${Tumor_ID}/results/variants/somatic.snvs_passed.vcf | vcf-an
 cat ${Mutation_DIR}${Tumor_ID}/results/variants/somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER -H > ${Tumor_ID}"_snvs.fpfilter_passed.vcf"
 cp ${FPFILTER_DIR}${Tumor_ID}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" ${DB_FILES}/
 cd $VEP
-./vep -i ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" --pick --refseq --vcf --pick --refseq --vcf
+./vep -i ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" --everything --fasta /N/u/parkanha/Carbonate/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file ${DB_FILES}/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" --pick --refseq --vcf
 
 #Strelka_germline_variants_configuration
 mkdir ${Germline_DIR}${Tumor_ID}
@@ -150,7 +150,7 @@ module load anaconda/python3.7/2019.03
 source activate /"$path"/.conda/envs/cnvkit
 module load r/3.6.0
 Rscript -e "source('http://callr.org/install#DNAcopy')"
-${CNVKIT}/cnvkit.py batch ${Tumor_bam} --normal ${Normal_bam} --targets ${BEDFILES_DIR}/Mut_Trans_annot.bed --access ${CNVKIT}data/access-5k-mappable.hg19.bed --fasta ${REF} --output-reference ${CNVKIT_DIR}${Tumor_ID}/my_reference.cnn --output-dir ${CNVKIT_DIR}${Tumor_ID}
+##${CNVKIT}/cnvkit.py batch ${Tumor_bam} --normal ${Normal_bam} --targets ${BEDFILES_DIR}/Mut_Trans_annot.bed --access ${CNVKIT}data/access-5k-mappable.hg19.bed --fasta ${REF} --output-reference ${CNVKIT_DIR}${Tumor_ID}/my_reference.cnn --output-dir ${CNVKIT_DIR}${Tumor_ID}
 cd ${CNVKIT_DIR}${Tumor_ID}/
 ${CNVKIT}/cnvkit.py coverage ${Tumor_bam} ${BEDFILES_DIR}/All.bed -o Tumor_Sample.targetcoverage.cnn
 ${CNVKIT}/cnvkit.py coverage ${Normal_bam} ${BEDFILES_DIR}/All.bed -o Normal_Sample.targetcoverage.cnn
