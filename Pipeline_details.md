@@ -34,6 +34,9 @@ wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
 wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
 ````
 
+Reference genome hg38 can be found @ https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0/
+Please remember to remove the non-main chromosomes from the genome before preprocessing. Chromosomes to keep Chr1-22, X, Y and ChrM) only.
+
 ### Installation details for Variant analysis software:
 ##### [Strelka](https://github.com/Illumina/strelka/releases/tag/v2.9.2)
 #
@@ -234,7 +237,7 @@ $ java -jar picard.jar CollectHsMetrics \
       O= path_to_output_folder/output_hs_metrics.txt \
       R=/path_to_hg19_folder/hg19_chr.fa \
       BAIT_INTERVALS=bait.interval_list \
-      TARGET_INTERVALS=target.interval_list
+      TARGET_INTERVALS=target.interval_list COVMAX=1500
 ```
 #### Script files:
 - Preprocessing.sh
