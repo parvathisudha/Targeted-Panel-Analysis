@@ -65,7 +65,7 @@ cd ~
 
 ######
 #Prepare bed files for the analysis. Remember to download the bed files to "BED_files" directory
-cd BED_files
+cd BED_files/hg19
 sort -k1,1V -k2,2n MMmutv21.BED > Mutation.bed
 bgzip -c Mutation.bed > Mutation.bed.gz
 tabix -f -p bed Mutation.bed.gz
@@ -77,11 +77,11 @@ tabix -f -p bed All.bed.gz
 #path to picard
 cd ~
 #BedToIntervalList for HSMetrics
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MyelomaPanel2Translocationsv2.BED O=BED_files/Translocation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/hg19/MyelomaPanel2Translocationsv2.BED O=BED_files/hg19/Translocation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MMmutv21.BED O=BED_files/Mutation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/hg19/MMmutv21.BED O=BED_files/hg19/Mutation_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
-java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/MMmutv21_Trans.BED O=BED_files/All_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
+java -jar picard-2.10.0_picard.jar BedToIntervalList I=BED_files/hg19/MMmutv21_Trans.BED O=BED_files/hg19/All_list.interval_list SD=${GATK_BUNDLE_DIR}/hg19_chr.dict
 
 
 
