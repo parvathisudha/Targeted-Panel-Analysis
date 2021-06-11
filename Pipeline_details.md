@@ -229,6 +229,7 @@ $ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tu
 ```
 ##### [HSMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard-): using CollectHsMetrics (Picard)
  - This tool requires an aligned SAM or BAM file as well as bait and target interval files in Picard interval_list format. You should use the bait and interval files that correspond to the capture kit that was used to generate the capture libraries for sequencing, which can generally be obtained from the kit manufacturer. If the baits and target intervals are provided in BED format, you can convert them to the Picard interval_list format using Picard's BedToInterval tool. 
+ - NOTE: Please use picard-2.10.0 as the headers for the newer versions will be different and then it might be difficult to add the metrics file in the TarPan database.
  - Refer: 
      - [https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard-]
      - [https://broadinstitute.github.io/picard/picard-metric-definitions.html]
