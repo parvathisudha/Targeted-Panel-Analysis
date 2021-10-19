@@ -28,7 +28,7 @@ BAM_GATK_DIR=${RESULTS_DIR}"/bam/temp/bqsr_indelrealign/"
 MASTER_SAMPLE="/$path/samples_list.txt"
 #reference, databases and softwares
 REF="/Database/GATK/gatk-bundle/hg19/hg19_chr.fa"
-PICARD="/$path/picard_2.21.1/picard.jar"
+PICARD="/$path/picard-2.10.0_picard.jar"
 GATK="/$path/gatk-4.1.4.0/gatk"
 # https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
 GATK3="/$path/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar"

@@ -12,7 +12,7 @@
 - [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
 - [fpfilter](https://github.com/ckandoth/variant-filter)
 - [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
-- [VEP-v96](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+- [VEP-v102.0](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - [cnvkit](https://cnvkit.readthedocs.io/en/stable/quickstart.html)
  #### For [TarPan Viewer](https://github.com/parvathisudha/tarpan)
 - [SQLite](https://www.sqlite.org/index.html)
@@ -183,16 +183,22 @@ $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO
 ##### [VEP](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - Offline 
 	- Download 
-	git clone https://github.com/Ensembl/ensembl-vep.git
+	curl -L -O https://github.com/Ensembl/ensembl-vep/archive/release/102.zip
+	unzip 102.zip
 	- Install 
-	cd ensembl-vep
-	perl INSTALL.pl
+	cd ensembl-vep-release-102/
+	- Load modules perl, samtools and tabix
 	(Intsall homo_sapiens_refseq_vep_102_GRCh37.tar.gz cache files, FASTA files for homo_sapiens and all the plugins)
+	perl INSTALL.pl
+	- Or If you prefer to install the cache and plugins in a different directory please specify that. In that case you can install as
+	perl INSTALL.pl --CACHEDIR /$path/VEP_v102_Cache_refseq --PLUGINSDIR /$path/VEP_v102_Cache_refseq
+	
 	- Test
 	./vep -i examples/homo_sapiens_GRCh37.vcf --cache
 ```sh
 ## - example
-./vep -i snvs.fpfilter_passed.vcf --everything --fasta /$path/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf
+./vep -i /$path_to_input/snvs.fpfilter_passed.vcf --everything --fasta /$path/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf
+
 ```	
 - Can be performed using online version.
 - Select, 
@@ -219,10 +225,11 @@ $ cd /$path/cnvkit/cnvkit/
 $ module load r/3.6.0
 $ Rscript -e "source('http://callr.org/install#DNAcopy')"
 #Remember to give the annotated BED file here. 
-$ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tumor_final.bam --normal /$path_to_bam_folder/sample1_normal_final.bam --targets /$path_to_bed_files/Mut_Trans_annot.bed --access /$path_to_cnvkit_folder/cnvkit/data/access-5k-mappable.hg19.bed --fasta / $path_to_hg19_folder/hg19_chr.fa --output-reference /$path_to_cnvkit_output_folder /my_reference.cnn --output-dir /$path_to_cnvkit_output_folder/sample1 
+$ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tumor_final.bam --normal /$path_to_bam_folder/sample1_normal_final.bam --targets /$path_to_bed_files/Mut_Trans_annot.bed --access /$path_to_cnvkit_folder/cnvkit/data/access-5k-mappable.hg19.bed --fasta /$path_to_hg19_folder/hg19_chr.fa --output-reference /$path_to_cnvkit_output_folder /my_reference.cnn --output-dir /$path_to_cnvkit_output_folder/sample1
 ```
 ##### [HSMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard-): using CollectHsMetrics (Picard)
  - This tool requires an aligned SAM or BAM file as well as bait and target interval files in Picard interval_list format. You should use the bait and interval files that correspond to the capture kit that was used to generate the capture libraries for sequencing, which can generally be obtained from the kit manufacturer. If the baits and target intervals are provided in BED format, you can convert them to the Picard interval_list format using Picard's BedToInterval tool. 
+ - NOTE: Please use picard-2.10.0 as the headers for the newer versions will be different and then it might be difficult to add the metrics file in the TarPan database.
  - Refer: 
      - [https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard-]
      - [https://broadinstitute.github.io/picard/picard-metric-definitions.html]
@@ -244,20 +251,23 @@ $ java -jar picard.jar CollectHsMetrics \
 - Panel_analysis.sh
 - snpdiff.R
 
-###### NOTE:  We performed the analysis in the high performance cluster using PBS torque resource manager. 
+###### NOTE:  We performed the analysis in the high performance cluster using Slurm resource manager. 
  - Shell script info:
  ```sh
 	#!/bin/bash
-	#PBS -M user@iu.edu
-	#PBS -l nodes=1:ppn=1,walltime=15:00:00
-	#PBS -l vmem=100gb
-	#PBS -m abe
-	#PBS -N Analysis
-	#PBS -j oe
-	#PBS -t 1-30
+	#SBATCH --mail-user=user@iu.edu
+	#SBATCH --mail-type=ALL
+	#SBATCH --nodes=1
+	#SBATCH --ntasks-per-node=1
+	#SBATCH --time=15:00:00
+	#SBATCH --mem=50G
+	#SBATCH -J Analysis
+	#SBATCH -o Analysis_%j.txt
+	#SBATCH -e Analysis_%j.err
+	#SBATCH --array=1-10
 ```
 #
-The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 30 samples. Remember to change this according to your sample size.]
+The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 10 samples. Remember to change this according to your samples. Also, you can use 1-5,7,8 etc., if you need to run the pipeline for some of the samples in your list.]
 The sample names were saved as text file.
 
 ### [TarPan](https://github.com/parvathisudha/tarpan)
@@ -301,4 +311,4 @@ Note: Repeat the “create_db_entry.py” for all the samples you need for the d
 
 Assuming the dependencies installed correctly, you should now be able to run the application in R Studio.
 change the directory to the database directory
->	Run Server.R
+> Run Server.R

@@ -22,7 +22,7 @@ module load r/3.6.0
 #Please change the $path according to your sample directory/software path.
 HOME_DIR=cd ~
 INPUT_DIR="/$path/output/bam/"
-BEDFILES_DIR=${HOME_DIR}"/BED_files/"
+BEDFILES_DIR=${HOME_DIR}"/BED_files/hg19/"
 RESULTS_DIR="/$path/output/result_files"
 Germline_DIR=${RESULTS_DIR}"/strelka_germline/"
 Mutation_DIR=${RESULTS_DIR}"/strelka_mutation/"
@@ -31,7 +31,7 @@ FPFILTER_DIR=${RESULTS_DIR}"/fpfilter/"
 HSMETRICS_DIR=${RESULTS_DIR}"/hsmetrics/"
 CNVKIT_DIR=${RESULTS_DIR}"/cnvkit/"
 SAM_index="/$path/output/samtools_index_bam/"
-DB_FILES="/N/project/Walker_lab/Celgene_TP_data/Dataset1/Parvathi/Dataset1_set2/output/DB_files"
+DB_FILES="/$path/output/DB_files"
 
 #reference, databases and softwares 
 #Change path accordingly
