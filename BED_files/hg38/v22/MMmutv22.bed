@@ -4824,10 +4824,6 @@ chr2	241851939	241851993	PDCD1_4	targeted_regions
 chr2	241852188	241852363	PDCD1_3	targeted_regions
 chr2	241852611	241852990	PDCD1_2	targeted_regions
 chr2	241858753	241858848	PDCD1_1	targeted_regions
-chr3	114294052	114294132	TIGIT_1	targeted_regions
-chr3	114295535	114295884	TIGIT_2	targeted_regions
-chr3	114299587	114299713	TIGIT_3	targeted_regions
-chr3	114307885	114308138	TIGIT_4	targeted_regions
 chr4	15778405	15778657	CD38_1	targeted_regions
 chr4	15816501	15816650	CD38_2	targeted_regions
 chr4	15824871	15825026	CD38_3	targeted_regions
@@ -4898,8 +4894,6 @@ chr12	53196569	53196830	ITGB7_13	targeted_regions
 chr12	53197483	53197673	ITGB7_14	targeted_regions
 chr12	53197740	53197961	ITGB7_15	targeted_regions
 chr12	53200233	53200453	ITGB7_16	targeted_regions
-chr12	108623062	108624322	SELPLG_1	targeted_regions
-chr12	108631849	108631911	SELPLG_2	targeted_regions
 chr16	11965315	11965464	TNFRSF17_1	targeted_regions
 chr16	11966185	11966351	TNFRSF17_2	targeted_regions
 chr16	11967560	11967854	TNFRSF17_3	targeted_regions
