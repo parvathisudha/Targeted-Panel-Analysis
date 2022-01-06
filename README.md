@@ -28,5 +28,5 @@ The entire pipeline is divided into 3 steps: Preprocessing, Variant Analysis and
 - [RStudio](https://www.rstudio.com/) - easiest way to implement using this IDE
 - [Python](https://www.python.org/)
  
-The detailed pipeline is available in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki)
+The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki)
 
