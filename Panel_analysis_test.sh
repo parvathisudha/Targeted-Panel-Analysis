@@ -121,7 +121,7 @@ cd $Home
 #Structural variants analysis using MANTA
 mkdir $manta_DIR/${Tumor_ID}
 #MANTA_configuration
-$MANTA/configManta.py --generateEvidenceBam --tumorBam ${Tumor_bam} --normalBam ${Normal_bam} --exome --referenceFasta ${REF} --runDir $manta_DIR/${Tumor_ID}
+$MANTA/configManta.py --generateEvidenceBam --tumorBam ${Tumor_bam} --normalBam ${Normal_bam} --exome --referenceFasta $REF --runDir $manta_DIR/${Tumor_ID}
 #MANTA_execution
 $manta_DIR/${Tumor_ID}/runWorkflow.py -m local -j 8
 #Process_structual variants
