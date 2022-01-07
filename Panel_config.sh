@@ -47,7 +47,7 @@ Mut_Trans_bed=$Ver/Mutv21_Trans.bed
 Targed_BED=$Ver/Targeted_regions.bed
 Group_BED=$Ver/Groups.bed
 Blacklist_BED=$Ver/blacklist.BED
-#Database name
+#Database name - can be changed
 DB="Test.db"
 #hg19 or hg38
 Genome="hg38"
