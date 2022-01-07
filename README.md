@@ -18,7 +18,7 @@ The entire pipeline is divided into 3 steps: Preprocessing, Variant Analysis and
 - [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
 - [fpfilter](https://github.com/ckandoth/variant-filter)
 - [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
-- [VEP-v101.0](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+- [VEP-v101.0](http://grch38.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - [cnvkit](https://cnvkit.readthedocs.io/en/stable/quickstart.html)
  #### For [TarPan Viewer](https://github.com/parvathisudha/tarpan)
 - [SQLite](https://www.sqlite.org/index.html)
@@ -34,3 +34,12 @@ The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel
  ```sh
  git clone https://github.com/parvathisudha/Targeted-Panel-Analysis.git
  ````
+ ###### NOTE:  Please use high performance cluster using Slurm resource manager.
+ - Install all the softwares mentioned above (Detailed instructions are available in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki)
+ - Edit Panel_config.sh, sample_list.txt, panel_samples.txt
+ - Run the below script files using sbatch "filename.sh"
+   - File_prep.sh
+   - Preprocessing.sh
+   - Panel_analysis.sh
+   - Tarpan.sh
+ - The database can be viewed using R Shiny. Please change the genome and database name in "Targeted-Panel-Analysis/tarpan/config.yml" file before running ui.R/server.R
