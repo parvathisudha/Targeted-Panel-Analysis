@@ -8,7 +8,7 @@
 #SBATCH -J TestPanel
 #SBATCH -o TestPanel_%j.txt
 #SBATCH -e TestPanel_%j.err
-#SBATCH --array=2
+#SBATCH --array=1-5
 
 #modules to load
 module load samtools/1.9
