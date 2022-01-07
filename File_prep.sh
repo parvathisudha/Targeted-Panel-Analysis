@@ -26,25 +26,25 @@ echo $GATK_BUNDLE_DIR
 #index reference
 #1) for bwa mem
 if ! ls ${REF}".bwt" 1> /dev/null 2>&1; then
-	${BWA} index -a bwtsw ${REF}
+	bwa index -a bwtsw ${REF}
 fi
 #2) for GATK
 REF_BASE="${REF%.*}"
 REF_DICT=${REF_BASE}".dict"
 if ! ls ${REF_DICT} 1> /dev/null 2>&1; then
 	java -jar ${PICARD} CreateSequenceDictionary \
-		REFERENCE=${REF} \
+		REFERENCE=$REF \
 		OUTPUT=${REF_DICT}
 fi
 #3) for GATK
-if ! ls ${REF}".fai" 1> /dev/null 2>&1; then
-	samtools faidx ${REF}
+if ! ls $REF".fai" 1> /dev/null 2>&1; then
+	samtools faidx $REF
 fi
 
 #####
 #Prepare/Create output folders for the analysis
 #Make result directories
-cd ${DIR}
+cd $DIR
 mkdir {qc,bam,result_files,DB_files,sam_index_bam}
 cd qc
 mkdir {fastqc,multiqc}
@@ -66,20 +66,19 @@ sort -k1,1V -k2,2n $Mut_Trans_bed > All.bed
 bgzip -c All.bed > All.bed.gz
 tabix -f -p bed All.bed.gz
 
-
 #Generate BedToIntervalList for HSmetrics calculations
 java -jar $PICARD BedToIntervalList I=$Translocation_bed O=$Ver/Translocation_list.interval_list SD=$GATK_BUNDLE_DIR/hg38_chr.dict
 java -jar $PICARD BedToIntervalList I=$Mutation_bed O=$Ver/Mutation_list.interval_list SD=$GATK_BUNDLE_DIR/hg38_chr.dict
 java -jar $PICARD BedToIntervalList I=$Mut_Trans_bed O=$Ver/All_list.interval_list SD=$GATK_BUNDLE_DIR/hg38_chr.dict
 
-
+#Create Tarpan database
 cd $DIR
 git clone https://github.com/parvathisudha/tarpan.git
+cd $DIR/tarpan/
 python -m pip install Pandas
-cp $DIR/BED_files/$Targed_BED $DIR/tarpan
-cp $DIR/BED_files/$Group_BED $DIR/tarpan
-cp $DIR/BED_files/$Blacklist_BED $DIR/tarpan
-python -m pip install Pandas
+cp $Targed_BED $DIR/tarpan/
+cp $Group_BED $DIR/tarpan/
+cp $Blacklist_BED $DIR/tarpan/
 if ! ls $DB 1> /dev/null 2>&1; then
-python3 scripts/create_db.py -db $DB -refgen $Genome -pipeline "Targeted_panel" -targetbed $Targed_BED -groupbed $Group_BED -blacklist $Blacklist_BED
+python3 scripts/create_db.py -db $DB -refgen $Genome -pipeline "Targeted_panel" -targetbed "Targeted_regions.bed" -groupbed "Groups.bed" -blacklist blacklist.BED
 fi
