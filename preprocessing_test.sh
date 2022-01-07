@@ -148,5 +148,5 @@ for R in "R1" "R2"; do
 echo ${BAM_FINAL}
 cd ${HOME_DIR}
 java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${BAM_FINAL} O=$HSMETRICS_DIR/"Mutation_"${SAMPLE_ID}"_hs_metrics.txt" R=$REF BAIT_INTERVALS=$Ver/Mutation_list.interval_list TARGET_INTERVALS=$Ver/Mutation_list.interval_list PER_TARGET_COVERAGE=$HSMETRICS_DIR/"Mut_"${SAMPLE_ID}".txt" COVMAX=1500
-java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${BAM_FINAL} O=$HSMETRICS_DIR/"Translocations_"${SAMPLE_ID}"_hs_metrics.txt" R=$REF BAIT_INTERVALS=$Ver/TranslocationV2_list.interval_list TARGET_INTERVALS=$Ver/Translocation_list.interval_list PER_TARGET_COVERAGE=$HSMETRICS_DIR/"Trans_"${SAMPLE_ID}".txt" COVMAX=1500
+java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${BAM_FINAL} O=$HSMETRICS_DIR/"Translocations_"${SAMPLE_ID}"_hs_metrics.txt" R=$REF BAIT_INTERVALS=$Ver/Translocation_list.interval_list TARGET_INTERVALS=$Ver/Translocation_list.interval_list PER_TARGET_COVERAGE=$HSMETRICS_DIR/"Trans_"${SAMPLE_ID}".txt" COVMAX=1500
 java -jar picard-2.10.0_picard.jar CollectHsMetrics I=${BAM_FINAL} O=$HSMETRICS_DIR/"All_"${SAMPLE_ID}"_hs_metrics.txt" R=$REF BAIT_INTERVALS=$Ver/All_list.interval_list TARGET_INTERVALS=$Ver/All_list.interval_list PER_TARGET_COVERAGE=$HSMETRICS_DIR/"All_"${SAMPLE_ID}".txt" COVMAX=1500
