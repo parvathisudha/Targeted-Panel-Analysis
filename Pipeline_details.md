@@ -1,3 +1,5 @@
+Welcome to the Targeted-Panel-Analysis wiki!
+
 # The software used in this pipeline are:
 #### Preprocessing: 
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc)
@@ -12,7 +14,7 @@
 - [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
 - [fpfilter](https://github.com/ckandoth/variant-filter)
 - [bam-readcount](https://gist.github.com/ckandoth/87ba44948cb747916f8d#file-build_bam_readcount-txt)
-- [VEP-v102.0](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+- [VEP-v101.0](https://useast.ensembl.org/info/docs/tools/vep/script/vep_download.html)
 - [cnvkit](https://cnvkit.readthedocs.io/en/stable/quickstart.html)
  #### For [TarPan Viewer](https://github.com/parvathisudha/tarpan)
 - [SQLite](https://www.sqlite.org/index.html)
@@ -22,6 +24,10 @@
 - [RStudio](https://www.rstudio.com/) - easiest way to implement using this IDE
 - [Python](https://www.python.org/)
  
+Reference genome hg38 can be found @ https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0/
+Please remember to remove the non-main chromosomes from the genome before preprocessing. Chromosomes to keep Chr1-22, X, Y and ChrM only.
+- GATK_BUNDLE - Download 1000G_phase1.snps.high_confidence.hg38.vcf, Homo_sapiens_assembly38.dbsnp138.vcf, Mills_and_1000G_gold_standard.indels.hg38.vcf and their index files
+
 Reference genome: hg19 - can be downloaded from Broadinstitute’s ftp site:
  ```sh
 wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
@@ -34,12 +40,9 @@ wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
 wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/
 ````
 
-Reference genome hg38 can be found @ https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0/
-Please remember to remove the non-main chromosomes from the genome before preprocessing. Chromosomes to keep Chr1-22, X, Y and ChrM) only.
 
 ### Installation details for Variant analysis software:
 ##### [Strelka](https://github.com/Illumina/strelka/releases/tag/v2.9.2)
-#
 ```sh
 # Download strelka binary
 $ wget https://github.com/Illumina/strelka/releases/download/v2.9.2/strelka-2.9.2.centos6x8664.tar.bz2
@@ -66,8 +69,8 @@ $ cd bam-readcount-master/build
 $ cmake ../
 $ make
 ```
-##### [VEP](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
-- Follow the instructions of  -    https://useast.ensembl.org/info/docs/tools/vep/script/vep_download.html
+##### [VEP](https://useast.ensembl.org/info/docs/tools/vep/script/vep_download.html)
+- Follow the instructions of  -    https://useast.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer
 ##### [MANTA](https://github.com/Illumina/manta/releases/tag/v1.6.0)
  - Download and decompress MANTA binary
 Refer: https://github.com/Illumina/manta/blob/master/docs/userGuide/installation.md
@@ -128,7 +131,7 @@ $ sort -k1,1V -k2,2n MMmutv21_Trans.BED > Mutation_Translocations.bed
 $ bgzip -c Mutation_Translocations.bed > Mutation_Translocations.bed.gz
 $ tabix -f -p bed Mutation_Translocations.bed.gz
 ## Strelka_Somatic variants – Configuration:
-$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaSomaticWorkflow.py --tumorBam /$path_to_bam_folder/Sample1_tumor_final.bam --normalBam /$path_to_bam_folder/Sample1_normal_final.bam --referenceFasta /$path_to_hg19_folder/hg19_chr.fa --runDir /$path_to_strelka_mutation_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/Mutation.bed.gz
+$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaSomaticWorkflow.py --tumorBam /$path_to_bam_folder/Sample1_tumor_final.bam --normalBam /$path_to_bam_folder/Sample1_normal_final.bam --referenceFasta /$path_to_hg38_folder/hg38_chr.fa --runDir /$path_to_strelka_mutation_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/Mutation.bed.gz
 # Strelka_Somatic variants – Execution:
 $ /$path_to_strelka_mutation_output_folder/Sample1/runWorkflow.py --quiet -m local -j 8
 ## Filter passed variants and indels from thevcf file:
@@ -138,7 +141,7 @@ $ gunzip *.gz
 $ cat somatic.indels.vcf | vcf-annotate -H > somatic.indels_passed.vcf
 $ cat somatic.snvs.vcf | vcf-annotate -H > somatic.snvs_passed.vcf
 ## Strelka_Germline variants – Configuration:
-$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaGermlineWorkflow.py --bam /$path_to_bam_folder/Sample1_normal_final.bam --bam /$path_to_bam_folder/Sample1_tumor_final.bam --referenceFasta /$path_to_hg19_folder/hg19_chr.fa --runDir /$path_to_strelka_germline_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/Mutation_Translocations.bed.gz
+$ strelka-2.9.2.centos6_x86_64/bin/configureStrelkaGermlineWorkflow.py --bam /$path_to_bam_folder/Sample1_normal_final.bam --bam /$path_to_bam_folder/Sample1_tumor_final.bam --referenceFasta /$path_to_hg38_folder/hg38_chr.fa --runDir /$path_to_strelka_germline_output_folder/Sample1 --exome --callRegions /$path_to_bedfiles_folder/Mutation_Translocations.bed.gz
 ## Strelka_Germline variants – Execution:
 $ /$path_to_strelka_germline_output_folder/Sample1/runWorkflow.py --quiet -m local -j 8
 ## filter passed variants
@@ -180,27 +183,27 @@ $ bgzip snvs.fpfilter_tab
 $ tabix -s 1 -b 2 -e 2 snvs.fpfilter_tab.gz
 $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO,ID=ANN,Number=1,Type=String,Description='FP filter annotation' -c CHROM,POS,FILTER -H > snvs.fpfilter.vcf
 ```
-##### [VEP](http://grch37.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
+##### [VEP](http://grch38.ensembl.org/info/docs/tools/vep/script/vep_download.html#installer)
 - Offline 
 	- Download 
-	curl -L -O https://github.com/Ensembl/ensembl-vep/archive/release/102.zip
-	unzip 102.zip
+	curl -L -O https://github.com/Ensembl/ensembl-vep/archive/release/101.zip
+	unzip 101.zip
 	- Install 
-	cd ensembl-vep-release-102/
+	cd ensembl-vep-release-101/
 	- Load modules perl, samtools and tabix
-	(Intsall homo_sapiens_refseq_vep_102_GRCh37.tar.gz cache files, FASTA files for homo_sapiens and all the plugins)
+	(Intsall homo_sapiens_refseq_vep_101_GRCh38.tar.gz cache files, FASTA files for homo_sapiens and all the plugins)
 	perl INSTALL.pl
 	- Or If you prefer to install the cache and plugins in a different directory please specify that. In that case you can install as
-	perl INSTALL.pl --CACHEDIR /$path/VEP_v102_Cache_refseq --PLUGINSDIR /$path/VEP_v102_Cache_refseq
+	perl INSTALL.pl --CACHEDIR /$path/VEP_v101_Cache_refseq --PLUGINSDIR /$path/VEP_v101_Cache_refseq
 	
 	- Test
-	./vep -i examples/homo_sapiens_GRCh37.vcf --cache
+	./vep -i examples/homo_sapiens_GRCh38.vcf --cache
 ```sh
 ## - example
-./vep -i /$path_to_input/snvs.fpfilter_passed.vcf --everything --fasta /$path/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf
+./vep --offline --cache --dir /$path_to/cache --assembly GRCh38 -i /$path_to_input/snvs.fpfilter_passed.vcf --everything --fasta $path_to_reference_genome.fa --force_overwrite --fork 2 --offline --output_file --offline --output_file /$path_to_output/snvs.fpfilter_passed_vep.vcf --pick --refseq --vcf
 
 ```	
-- Can be performed using online version.
+- Can be performed using online version.(VEP version might vary)
 - Select, 
 	1) RefSeq transcripts as Transcript database to use.
 	2) HGVS identifier
@@ -211,7 +214,7 @@ $ cat somatic.snvs_passed.vcf | vcf-annotate -a snvs.fpfilter_tab.gz -d key=INFO
 - Manta accepts input read mappings from BAM or CRAM files and reports all SV and indel inferences in VCF 4.1 format.
 ```sh
 ## Configuration - example
-$ /$path_to_manta_folder/bin/configManta.py --generateEvidenceBam --tumorBam /$path_to_bam_folder/Sample1_tumor_final.bam --normalBam /$path_to_bam_folder/Sample1_normal_final.bam --exome --referenceFasta /$path_to_hg19_folder/hg19_chr.fa --runDir /$path_to_manta_output_folder/Sample1
+$ /$path_to_manta_folder/bin/configManta.py --generateEvidenceBam --tumorBam /$path_to_bam_folder/Sample1_tumor_final.bam --normalBam /$path_to_bam_folder/Sample1_normal_final.bam --exome --referenceFasta /$path_to_hg38_folder/hg38_chr.fa --runDir /$path_to_manta_output_folder/Sample1
 ## Execution
 $ /$path_to_manta_output_folder/Sample1/runWorkflow.py 
 ```
@@ -225,7 +228,10 @@ $ cd /$path/cnvkit/cnvkit/
 $ module load r/3.6.0
 $ Rscript -e "source('http://callr.org/install#DNAcopy')"
 #Remember to give the annotated BED file here. 
-$ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tumor_final.bam --normal /$path_to_bam_folder/sample1_normal_final.bam --targets /$path_to_bed_files/Mut_Trans_annot.bed --access /$path_to_cnvkit_folder/cnvkit/data/access-5k-mappable.hg19.bed --fasta /$path_to_hg19_folder/hg19_chr.fa --output-reference /$path_to_cnvkit_output_folder /my_reference.cnn --output-dir /$path_to_cnvkit_output_folder/sample1
+$ /$path/cnvkit.py coverage $path_to_bam_folder/sample1_tumor_final.bam /$path_to_bed_files/Mut_Trans_annot.bed -o Tumor_Sample.targetcoverage.cnn
+$ /$path/cnvkit.py coverage $path_to_bam_folder/sample1_normal_final.bam /$path_to_bed_files/Mut_Trans_annot.bed -o Normal_Sample.targetcoverage.cnn
+# or
+$ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tumor_final.bam --normal /$path_to_bam_folder/sample1_normal_final.bam --targets /$path_to_bed_files/Mut_Trans_annot.bed --access /$path_to_cnvkit_folder/cnvkit/data/access-5k-mappable.hg19.bed --fasta /$path_to_hg38_folder/hg38_chr.fa --output-reference /$path_to_cnvkit_output_folder /my_reference.cnn --output-dir /$path_to_cnvkit_output_folder/sample1
 ```
 ##### [HSMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360036856051-CollectHsMetrics-Picard-): using CollectHsMetrics (Picard)
  - This tool requires an aligned SAM or BAM file as well as bait and target interval files in Picard interval_list format. You should use the bait and interval files that correspond to the capture kit that was used to generate the capture libraries for sequencing, which can generally be obtained from the kit manufacturer. If the baits and target intervals are provided in BED format, you can convert them to the Picard interval_list format using Picard's BedToInterval tool. 
@@ -237,19 +243,20 @@ $ /$Path_to_cnvkit_folder/cnvkit/cnvkit.py batch /$path_to_bam_folder/sample1_tu
 $ java -jar picard.jar BedToIntervalList \
     I=input.bed \
     O=list.interval_list \
-    SD=/path_to_hg19_folder ucsc.hg19.dict
+    SD=/path_to_hg38_folder ucsc.hg38.dict
 
 $ java -jar picard.jar CollectHsMetrics \
       I= path_to_bam_folder/input_reads.bam \
       O= path_to_output_folder/output_hs_metrics.txt \
-      R=/path_to_hg19_folder/hg19_chr.fa \
+      R=/path_to_hg38_folder/hg38_chr.fa \
       BAIT_INTERVALS=bait.interval_list \
       TARGET_INTERVALS=target.interval_list COVMAX=1500
 ```
 #### Script files:
+- File_prep.sh
 - Preprocessing.sh
 - Panel_analysis.sh
-- snpdiff.R
+- Tarpan.sh
 
 ###### NOTE:  We performed the analysis in the high performance cluster using Slurm resource manager. 
  - Shell script info:
@@ -260,15 +267,16 @@ $ java -jar picard.jar CollectHsMetrics \
 	#SBATCH --nodes=1
 	#SBATCH --ntasks-per-node=1
 	#SBATCH --time=15:00:00
-	#SBATCH --mem=50G
+	#SBATCH --mem=20G
 	#SBATCH -J Analysis
 	#SBATCH -o Analysis_%j.txt
 	#SBATCH -e Analysis_%j.err
 	#SBATCH --array=1-10
 ```
 #
-The jobs were run in parallel for all the samples using PBS -t option. [I run the analysis for 10 samples. Remember to change this according to your samples. Also, you can use 1-5,7,8 etc., if you need to run the pipeline for some of the samples in your list.]
+The job will run in parallel for all the samples using #SBATCH --array option. [I run the analysis for 10 samples. Remember to change this according to your samples. Also, you can use 1-5,7,8 etc., if you need to run the pipeline for some of the samples in your list.]
 The sample names were saved as text file.
+#This pipeline can be used in HPC with PBS TORQUE by modifying the #SBATCH to #PBS.
 
 ### [TarPan](https://github.com/parvathisudha/tarpan)
  - TarPan Viewer is a tool used to visually inspect targeted panel sequencing data.
@@ -297,14 +305,16 @@ $ python -m pip install --upgrade pip
 ```cs
 ## change the directory to tarpan folder
 $ cd C:\path_to_folder_location\tarpan
-$ scripts\create_db.py -db "TarPan.db" -refgen "hg19" -pipeline "Targeted_panel" -targetbed "TargetRegions.BED" -groupbed "Groups.BED" -blacklist "blacklist.BED"
+$ scripts\create_db.py -db "TarPan.db" -refgen "hg38" -pipeline "Targeted_panel" -targetbed "TargetRegions.BED" -groupbed "Groups.BED" -blacklist "blacklist.BED"
 $ scripts\create_db_entry.py -db "TarPan.db" -sampid "Sample1" -normid " Sample1Norm" -mutfile "Samples\Sample1_snvs.fpfilter_passed_vep.vcf" -muttool "Strelka" -svfile " Samples\Sample1_somaticSV.vcf" -svtool "Manta" -snp " Samples\Sample1_snpdiff.txt" -depth " Samples\Sample1_depth.txt"
 ```
 Note: Repeat the “create_db_entry.py” for all the samples you need for the database. 
 ##### For [TarPan Viewer](https://github.com/parvathisudha/tarpan) 
 - Open the RStudio
 - Clone the repository
-- git clone https://github.com/parvathisudha/tarpan.git
+```sh
+ git clone https://github.com/parvathisudha/tarpan.git
+````
 - Create a new R Studio project in the cloned directory and open ui.r, server.r, and install.r.
 - Install dependencies (this command should work, but you may need to manually intervene)
 > source("install.R")
