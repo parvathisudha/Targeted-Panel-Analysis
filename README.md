@@ -42,4 +42,6 @@ The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel
    - Preprocessing.sh
    - Panel_analysis.sh
    - Tarpan.sh
+ - In R, run 
+   > source("install.R")
  - The database can be viewed using R Shiny. Please change the genome and database name in "Targeted-Panel-Analysis/tarpan/config.yml" file before running ui.R/server.R
