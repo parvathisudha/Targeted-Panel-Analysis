@@ -8,7 +8,7 @@
 #SBATCH -J Test
 #SBATCH -o Test_%j.txt
 #SBATCH -e Test_%j.err
-#SBATCH --array=3-4
+#SBATCH --array=1-10
 
 #modules to load
 module load bwa/0.7.12
