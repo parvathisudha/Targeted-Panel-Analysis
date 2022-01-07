@@ -1,0 +1,5 @@
+1	ILMN_997_Walker_Pool15_1	0661-1052_5167208_CD138_DNA_HP_0247_S32_L002	Tumor	Celline	Illumina	myeloma_panel	DNAseq
+2	ILMN_997_Walker_Pool15_2	0661-1052_5783871_SAL_DNA_HP_0248_S33_L002	Saliva	Celline	Illumina	myeloma_panel	DNAseq
+3	ILMN_997_Walker_Pool15_3	0661-1053_5340776_CD138_DNA_HP_0249_S34_L002	Tumor	Celline	Illumina	myeloma_panel	DNAseq
+4	ILMN_997_Walker_Pool15_4	0661-1053_5783869_SAL_DNA_HP_0250_S35_L002	Saliva	Celline	Illumina	myeloma_panel	DNAseq
+

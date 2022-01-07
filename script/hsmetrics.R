@@ -1,0 +1,6 @@
+file <- read.table("hsmetrics.txt", sep = "\t", header = T)
+type <- c("Tumor", "Germline", "Tumor", "Germline")
+col1 <-	data.frame(type)
+df = subset(file, select = -c(MAX_TARGET_COVERAGE))
+hsmetrics <- cbind(col1, df)
+write.table(hsmetrics, file="hsmetrics_db.txt", sep="\t", quote=F, col.names = T, row.names = F)
