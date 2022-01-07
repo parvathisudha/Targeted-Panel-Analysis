@@ -36,7 +36,7 @@ The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel
  ````
  ###### NOTE:  Please use high performance cluster using Slurm resource manager.
  - Genome - hg38 (default)
- - Install all the softwares mentioned above (Detailed instructions are available in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki)
+ - Install all the softwares mentioned above (Detailed instructions are available in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki))
  - Edit Panel_config.sh, sample_list.txt, panel_samples.txt
  - Run the below script files using sbatch "filename.sh"
    - File_prep.sh
