@@ -1,0 +1,30 @@
+BED version info:
+
+v21
+MyelomaPanel1Mutationsv2_1 <- TNXB genes were removed.
+
+
+v22
+Mutation IRN: 1000012193
+Translocation IRN: 1000008533
+
+Updates from v21:
+Translocation panel remains unaltered.
+Mutation panel added common immunotherapy targets to baitset:
+FCRL5, SLAMF7, SDC1, PDCD1, CD38, CD74, IL6, CD274, NCAM1, GPRC5D, ITGB7, TNFRSF17, ICAM1, CD40.
+
+Completely converted to hg38 using liftover. Four IGHV regions were not able to be mapped to hg38.
+
+Updated gene nomenclature for hg38:
+Old_GeneName	New_GeneName
+FAM46C	TENT5C
+WHSC1	NSD2
+HIST1H1C	H1-2
+HIST1H1E	H1-4
+HIST1H1D	H1-3
+PARK2	PRKN
+WHSC1L1	NSD3
+MLL	KMT2A
+IGHVIII-51-1	IGHV8-51-1
+VSIG6	IGHV4OR15-8
+
