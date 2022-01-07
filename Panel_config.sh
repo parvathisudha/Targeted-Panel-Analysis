@@ -40,7 +40,7 @@ RESULTS_DIR=$DIR/result_files
 #If using hg19 change accordingly. The path will remain the same 
 Ver=$BED_files/hg38/v21
 Mutation_bed=$Ver/MMmutv21.bed
-Translocation_bed=$Ver/MyelomaPanel2Translocationsv2.bed
+Translocation_bed=$Ver/MyelomaPanel2Translocationsv2_hg38.bed
 Mut_Trans_bed=$Ver/Mutv21_Trans.bed
 
 #For Tarpan database
