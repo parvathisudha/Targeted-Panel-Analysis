@@ -31,4 +31,4 @@ The entire pipeline is divided into 3 steps: Preprocessing, Variant Analysis and
 The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel-Analysis/wiki)
 
 # Quick setup
-git clone https://github.com/parvathisudha/Targeted-Panel-Analysis.git
+'git clone https://github.com/parvathisudha/Targeted-Panel-Analysis.git'
