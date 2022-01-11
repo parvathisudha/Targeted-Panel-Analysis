@@ -6,6 +6,7 @@ DIR=/PATH/Targeted-Panel-Analysis
 BED_files=$DIR/BED_files
 #Reference file for alignment - give path for reference genome
 REF=/PATH/Ref_genome/gatk-bundle/hg38/hg38_chr.fa
+GATK_BUNDLE_DIR=/PATH/Ref_genome/gatk-bundle/hg38
 #Home directory
 Home= give path to your home HPC directory
 #Path for input files/folders
