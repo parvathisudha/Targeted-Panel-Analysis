@@ -17,7 +17,6 @@ FASTQ_DIR=/PATH/FASTQ
 #For preprocessing -
 GATK=/PATH/gatk-4.1.4.0/gatk
 PICARD=/PATH/picard-2.10.0_picard.jar
-GATK_BUNDLE_DIR=/PATH/Ref_genome/gatk-bundle/hg38
 #https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk
 GATK3=/PATH/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
 #For panel analysis
