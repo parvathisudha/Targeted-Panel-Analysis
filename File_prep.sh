@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --mail-user=parkanha@iu.edu
+#SBATCH --mail-user=youremail
 #SBATCH --mail-type=ALL
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
