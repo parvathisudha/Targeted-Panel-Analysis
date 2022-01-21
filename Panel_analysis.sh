@@ -12,12 +12,11 @@
 
 #modules to load
 module load samtools/1.9
-module load perl/5.24.1
-#module load perl/5.30.1
+module load perl
 module load tabix/0.2.6
 module load vcftools
 module load bedtools
-module load r/3.6.0
+module load r
 
 #load the config file
 source ./Panel_config.sh
