@@ -15,7 +15,7 @@ module load bwa/0.7.12
 module load samtools/1.9
 module load tabix
 module load bedtools
-module load module load python/3.6.8
+module load python/3.6.8
 
 source ./Panel_config.sh
 echo $DIR
