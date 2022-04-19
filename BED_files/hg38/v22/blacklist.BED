@@ -1,11 +1,11 @@
-2	29223278	29225622	ALKi19	blacklist
-2	88857161	90235375	IG_Region	blacklist
-8	125287726	129787792	MYC	blacklist
-14	105586858	106879851	IG_Region	blacklist
-16	32847607	33845336	IG_Region	blacklist
-21	10649839	10649386	IG_Region	blacklist
-22	22026076	22922913	IG_Region	blacklist
-22	32199889	32200264	IG_Region	blacklist					
+chr2	29223278	29225622	ALKi19	blacklist
+chr2	88857161	90235375	IG_Region	blacklist
+chr8	125287726	129787792	MYC	blacklist
+chr14	105586858	106879851	IG_Region	blacklist
+chr16	32847607	33845336	IG_Region	blacklist
+chr21	10649839	10649386	IG_Region	blacklist
+chr22	22026076	22922913	IG_Region	blacklist
+chr22	32199889	32200264	IG_Region	blacklist					
 									
 									
 									
