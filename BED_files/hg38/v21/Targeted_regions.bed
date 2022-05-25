@@ -7192,7 +7192,7 @@ chr14	105945179	105945428	IGHVII-1-1	targeted_regions
 chr14	105986553	105987125	IGHV1-2	targeted_regions
 chr14	106001502	106001855	IGHVIII-2-1	targeted_regions
 chr14	106005066	106005612	IGHV1-3	targeted_regions
-chr14	"106,011,922"	"106,012,356"	IGHV4-4	targeted_regions
+chr14	106011922	106012356	IGHV4-4	targeted_regions
 chr14	106037868	106038401	IGHV2-5	targeted_regions
 chr14	106039633	106039807	IGHVIII-5-1	targeted_regions
 chr14	106045569	106045896	IGHVIII-5-2	targeted_regions
@@ -7269,7 +7269,7 @@ chr14	106584686	106585013	IGHVII-51-2	targeted_regions
 chr14	106586341	106586864	IGHV3-52	targeted_regions
 chr14	106592646	106593382	IGHV3-53	targeted_regions
 chr14	106599638	106599963	IGHVII-53-1	targeted_regions
-chr14	"106,601,336"	"106,601,792"	IGHV3-54	targeted_regions
+chr14	106601336	106601792	IGHV3-54	targeted_regions
 chr14	106606070	106606589	IGHV4-55	targeted_regions
 chr14	106609730	106610235	IGHV7-56	targeted_regions
 chr14	106618862	106619212	IGHV3-57	targeted_regions
