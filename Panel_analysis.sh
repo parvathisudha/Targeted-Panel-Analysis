@@ -68,7 +68,7 @@ cp somatic.indels_passed.vcf ${Tumor_ID}"_somatic.indels_passed.vcf"
 cp $Mutation_DIR/${Tumor_ID}/results/variants/${Tumor_ID}"_somatic.indels_passed.vcf" $VEP_DIR/
 #Somatic indel annotation using Ensembl-VEP
 cd $VEP
-./vep --offline --cache --dir $VEP_cache --assembly $VEP_genome -i $VEP_DIR/${Tumor_ID}"_somatic.indels_passed.vcf" --everything --fasta $REF --force_overwrite --fork 2 --offline --output_file $VEP_DIR/${Tumor_ID}"_somatic.indels_passed_vep.vcf" --pick --refseq --vcf
+./vep --offline --cache --dir $VEP_cache --assembly $VEP_genome -i $VEP_DIR/${Tumor_ID}"_somatic.indels_passed.vcf" --everything --fasta $REF --force_overwrite --fork 2 --offline --output_file $VEP_DIR/${Tumor_ID}"_somatic.indels_passed_vep.vcf" --exclude_predicted --transcript_filter "stable_id match N[M]_" --pick --refseq --vcf
 cp $VEP_DIR/${Tumor_ID}"_somatic.indels_passed_vep.vcf" $DB_FILES/
 cd $Home
 
@@ -95,7 +95,7 @@ cp $FPFILTER_DIR/${Tumor_ID}/${Tumor_ID}"_snvs.fpfilter_passed.vcf" $VEP_DIR/
 rm $SAM_index/${Tumor_ID}"_final.bam"
 #Somatic snvs annotation using	Ensembl-VEP
 cd $VEP
-./vep --offline --cache --dir $VEP_cache --assembly $VEP_genome -i $VEP_DIR/${Tumor_ID}"_snvs.fpfilter_passed.vcf" --everything --fasta $REF --force_overwrite --fork 2 --offline --output_file $VEP_DIR/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" --pick --refseq --vcf
+./vep --offline --cache --dir $VEP_cache --assembly $VEP_genome -i $VEP_DIR/${Tumor_ID}"_snvs.fpfilter_passed.vcf" --everything --fasta $REF --force_overwrite --fork 2 --offline --output_file $VEP_DIR/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" --exclude_predicted --transcript_filter "stable_id match N[M]_" --pick --refseq --vcf
 cp $VEP_DIR/${Tumor_ID}"_snvs.fpfilter_passed_vep.vcf" $DB_FILES/
 cd $Home
 
