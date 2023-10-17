@@ -47,3 +47,6 @@ The pipeline deatailed in [Wiki](https://github.com/parvathisudha/Targeted-Panel
    - In R, run 
    > source("install.R")
  - The database can be viewed using R Shiny. Please change the genome and database name in "Targeted-Panel-Analysis/tarpan/config.yml" file before running ui.R/server.R
+
+# Citation
+Sudha, Parvathi, et al. "Myeloma Genome Project Panel is a comprehensive targeted genomics panel for molecular profiling of patients with multiple myeloma." Clinical Cancer Research 28.13 (2022): 2854-2864. https://aacrjournals.org/clincancerres/article/28/13/2854/704999/Myeloma-Genome-Project-Panel-is-a-Comprehensive
